@@ -1,0 +1,22 @@
+language: node_js
+sudo: required
+services:
+        - docker
+before_install:
+        - docker build -t mohgamalmoh/react-test -f ./client/Dockerfile.dev ./client
+           
+script:
+        - docker run -e CI=true mohgamalmoh/react-test npm run test
+
+after_success:
+        - docker build -t mohgamalmoh/multi-client ./client
+        - docker build -t mohgamalmoh/multi-nginx ./nginx
+        - docker build -t mohgamalmoh/multi-server ./server
+        - docker build -t mohgamalmoh/multi-worker ./worker
+#docker cli login through travis
+- echo "$docker_password" | docker login -u "$docker_id" --password-stdin
+#push to hub
+- docker push mohgamalmoh/multi-client
+- docker push mohgamalmoh/multi-nginx
+- docker push mohgamalmoh/multi-server
+- docker push mohgamalmoh/multi-worker
