@@ -13,10 +13,10 @@ after_success:
         - docker build -t mohgamalmoh/multi-nginx ./nginx
         - docker build -t mohgamalmoh/multi-server ./server
         - docker build -t mohgamalmoh/multi-worker ./worker
-#docker cli login through travis
-- echo "$docker_password" | docker login -u "$docker_id" --password-stdin
-#push to hub
-- docker push mohgamalmoh/multi-client
-- docker push mohgamalmoh/multi-nginx
-- docker push mohgamalmoh/multi-server
-- docker push mohgamalmoh/multi-worker
+        #docker cli login through travis
+        - echo "$docker_password" | docker login -u "$docker_id" --password-stdin
+        #push to hub
+        - docker push mohgamalmoh/multi-client
+        - docker push mohgamalmoh/multi-nginx
+        - docker push mohgamalmoh/multi-server
+        - docker push mohgamalmoh/multi-worker
