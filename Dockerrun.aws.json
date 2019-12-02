@@ -11,7 +11,7 @@
     {
       "name": "server",
       "image": "mohgamalmoh/multi-server",
-      "hostname": "api_server",
+      "hostname": "api",
       "essential": false,
       "memory": 128
     },
